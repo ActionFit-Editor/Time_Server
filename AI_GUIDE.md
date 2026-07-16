@@ -4,9 +4,9 @@
 
 - Package ID: `com.actionfit.time.server`
 - Display name: ActionFit Time Server
-- Repository: `https://github.com/ActionFitGames/Time_Server.git`
-- Repository visibility: Private
-- Current package version at generation time: `1.0.0`
+- Repository: `https://github.com/ActionFit-Editor/Time_Server.git`
+- Repository visibility: Public
+- Current package version at generation time: `1.0.1`
 - Unity version: `6000.2`
 
 ## Purpose
@@ -56,6 +56,6 @@ Requested router entry:
 
 ## Release Notes
 
-- This package is Private because its direct ActionFit Time and Connectivity dependencies are Private.
+- This package is Public; its direct ActionFit Time and Connectivity dependencies are also Public.
 - Before reusing a version, check remote tags. Published tags are immutable.
 - Keep `package.json`, README, this guide, PackageInfo, tests, and dependency versions aligned.

@@ -42,16 +42,16 @@ ServerTimeSynchronizationResult result = await synchronizer.SynchronizeAsync(
 
 이 패키지는 서버 UTC 확보와 세션 시계만 소유합니다. 프로젝트 설정 SO, endpoint 선택, 시작/포그라운드 gate, 게임 입력 제한, 일일 이벤트 catch-up 및 DevTool offset은 consuming project가 소유합니다.
 
-현재 패키지와 의존 패키지는 Private 배포 대상입니다. 게시, 원격 저장소 생성, tag 및 catalog 등록은 Custom Package Manager의 수동 게시 흐름에서 별도로 수행합니다.
+현재 패키지와 의존 패키지는 Public 배포 대상입니다. 게시, 원격 저장소 생성, tag 및 catalog 등록은 Custom Package Manager의 수동 게시 흐름에서 별도로 수행합니다.
 
 ## 설치
 
-현재 Cat Merge Cafe에서는 embedded package로 사용합니다. Custom Package Manager를 통해 Private 저장소와 `1.0.0` tag를 수동 게시한 뒤 다른 인증된 프로젝트에서는 다음 Git UPM 주소를 사용할 수 있습니다.
+현재 Cat Merge Cafe에서는 embedded package로 사용합니다. Custom Package Manager를 통해 Public 저장소와 `1.0.0` tag를 수동 게시한 뒤 다른 인증된 프로젝트에서는 다음 Git UPM 주소를 사용할 수 있습니다.
 
 ```json
 {
   "dependencies": {
-    "com.actionfit.time.server": "https://github.com/ActionFitGames/Time_Server.git#1.0.0"
+    "com.actionfit.time.server": "https://github.com/ActionFit-Editor/Time_Server.git#1.0.1"
   }
 }
 ```
