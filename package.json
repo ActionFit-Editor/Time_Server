@@ -1,6 +1,6 @@
 {
   "name": "com.actionfit.time.server",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "displayName": "ActionFit Time Server",
   "description": "Session-scoped trusted UTC synchronization from fresh HTTPS Date observations and monotonic elapsed time.",
   "unity": "6000.2",
@@ -8,7 +8,7 @@
     "name": "ActionFit"
   },
   "dependencies": {
-    "com.actionfit.time": "1.0.2",
-    "com.actionfit.connectivity": "1.0.3"
+    "com.actionfit.time": "1.0.3",
+    "com.actionfit.connectivity": "1.0.4"
   }
 }

@@ -46,12 +46,12 @@ ServerTimeSynchronizationResult result = await synchronizer.SynchronizeAsync(
 
 ## 설치
 
-현재 Cat Merge Cafe에서는 embedded package로 사용합니다. Custom Package Manager를 통해 Public 저장소와 `1.0.0` tag를 수동 게시한 뒤 다른 인증된 프로젝트에서는 다음 Git UPM 주소를 사용할 수 있습니다.
+현재 Cat Merge Cafe에서는 embedded package로 사용합니다. Custom Package Manager를 통해 Public 저장소와 `1.0.2` tag를 수동 게시한 뒤 다른 인증된 프로젝트에서는 다음 Git UPM 주소를 사용할 수 있습니다.
 
 ```json
 {
   "dependencies": {
-    "com.actionfit.time.server": "https://github.com/ActionFit-Editor/Time_Server.git#1.0.1"
+    "com.actionfit.time.server": "https://github.com/ActionFit-Editor/Time_Server.git#1.0.2"
   }
 }
 ```
