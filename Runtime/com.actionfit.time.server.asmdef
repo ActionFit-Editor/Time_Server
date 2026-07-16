@@ -1,0 +1,17 @@
+{
+  "name": "com.actionfit.time.server",
+  "rootNamespace": "ActionFit.Time.Server",
+  "references": [
+    "com.actionfit.time",
+    "com.actionfit.connectivity"
+  ],
+  "includePlatforms": [],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": true,
+  "defineConstraints": [],
+  "versionDefines": [],
+  "noEngineReferences": true
+}

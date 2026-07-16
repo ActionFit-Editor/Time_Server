@@ -1,0 +1,24 @@
+{
+  "name": "com.actionfit.time.server.Editor.Tests",
+  "rootNamespace": "ActionFit.Time.Server.Tests",
+  "references": [
+    "com.actionfit.time.server",
+    "com.actionfit.connectivity"
+  ],
+  "includePlatforms": [
+    "Editor"
+  ],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": false,
+  "defineConstraints": [
+    "UNITY_INCLUDE_TESTS"
+  ],
+  "versionDefines": [],
+  "noEngineReferences": false,
+  "optionalUnityReferences": [
+    "TestAssemblies"
+  ]
+}
