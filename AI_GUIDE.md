@@ -6,7 +6,7 @@
 - Display name: ActionFit Time Server
 - Repository: `https://github.com/ActionFit-Editor/Time_Server.git`
 - Repository visibility: Public
-- Current package version at generation time: `1.0.2`
+- Current package version at generation time: `1.0.4`
 - Unity version: `6000.2`
 
 ## Purpose

@@ -51,12 +51,12 @@ ServerTimeSynchronizationResult result = await synchronizer.SynchronizeAsync(
 ```json
 {
   "dependencies": {
-    "com.actionfit.time.server": "https://github.com/ActionFit-Editor/Time_Server.git#1.0.2"
+    "com.actionfit.time.server": "https://github.com/ActionFit-Editor/Time_Server.git#1.0.4"
   }
 }
 ```
 
-## Unity Menu
+## Unity 메뉴
 
 - Package root: `Tools > Package > ActionFit Time Server`
 - README: `Tools > Package > ActionFit Time Server > README`
