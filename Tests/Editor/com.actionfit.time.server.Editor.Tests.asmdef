@@ -3,7 +3,11 @@
   "rootNamespace": "ActionFit.Time.Server.Tests",
   "references": [
     "com.actionfit.time.server",
-    "com.actionfit.connectivity"
+    "com.actionfit.time.server.Unity",
+    "com.actionfit.time",
+    "com.actionfit.connectivity",
+    "com.actionfit.sosingleton",
+    "com.actionfit.sosingleton.Editor"
   ],
   "includePlatforms": [
     "Editor"

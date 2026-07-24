@@ -2,7 +2,10 @@
   "name": "com.actionfit.time.server.Editor",
   "rootNamespace": "ActionFit.Time.Server.Editor",
   "references": [
-    "com.actionfit.time.server"
+    "com.actionfit.time.server",
+    "com.actionfit.time.server.Unity",
+    "com.actionfit.sosingleton",
+    "com.actionfit.sosingleton.Editor"
   ],
   "includePlatforms": [
     "Editor"

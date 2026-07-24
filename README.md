@@ -1,6 +1,6 @@
 # ActionFit Time Server (`com.actionfit.time.server`)
 
-캐시되지 않은 HTTPS `Date` 응답을 세션 기준 UTC로 동기화하고, 이후 시간을 기기 wall clock이 아닌 monotonic elapsed time으로 진행합니다.
+캐시되지 않은 HTTPS `Date` 응답을 세션 기준 UTC로 동기화하고, 이후 시간을 기기 wall clock이 아닌 monotonic elapsed time으로 진행합니다. Unity 설정 표면은 device/server clock과 게임 달력 정책을 하나의 `ConfiguredGameTime`으로 결합합니다.
 
 ## 주요 기능
 
@@ -10,6 +10,8 @@
 - `ServerSessionClock`의 monotonic 진행과 pause freeze
 - 동기화 전 또는 실패 상태에서 기기 시간 fallback 없이 fail-closed 처리
 - 동기화된 기준값을 메모리에만 유지
+- 패키지 소유 `TimeServerSettingsSO`의 `UseServerTime`, `CalendarMode`, signed `DayBoundaryOffsetHours`
+- 기존 설정 에셋을 재사용하고 없을 때만 canonical `_Data` 경로에 생성하는 안전한 settings lifecycle
 
 ## 기본 사용법
 
@@ -38,20 +40,33 @@ ServerTimeSynchronizationResult result = await synchronizer.SynchronizeAsync(
 - `Pause()` 이후에는 새 동기화가 성공할 때까지 마지막 신뢰 시각을 고정합니다.
 - `DateTime.Now`, `DateTime.UtcNow`, `SystemClock.Instance.UtcNow`를 서버 시계 경로에서 사용하지 않습니다.
 
+## 게임 달력 설정
+
+- `UseServerTime=false`: device clock, `TimeZoneInfo.Local`, 날짜 경계 `0`
+- `UseServerTime=true`, `CalendarMode=Utc`: server clock, `TimeZoneInfo.Utc`, signed 날짜 경계
+- `UseServerTime=true`, `CalendarMode=DeviceLocal`: server clock, `TimeZoneInfo.Local`, signed 날짜 경계
+- `Now = selectedCalendarNow - DayBoundaryOffset`
+- `Today = Now.Date`
+- `UtcNow = selected IClock.UtcNow`
+
+`DayBoundaryOffsetHours`는 `-23..23`입니다. 기존 직렬화 키 `additionalOffsetHours`와 `AdditionalOffsetHours` 읽기 API는 호환성을 위해 유지됩니다. UTC 달력에서 `0`은 한국 시간 09:00, `-9`는 한국 시간 00:00에 게임 날짜가 바뀝니다.
+
+`TimeServerSettingsSO`는 `Assets/_Data/_TimeServer/Resources/SO/TimeServerSettingsSO.asset`을 canonical 경로로 사용합니다. 기존 canonical, 등록된 legacy 또는 하나뿐인 유효 에셋은 GUID와 값을 유지한 채 재사용합니다. 중복·점유·잘못된 등록 상태에서는 새 에셋을 만들지 않습니다.
+
 ## 패키지 경계
 
-이 패키지는 서버 UTC 확보와 세션 시계만 소유합니다. 프로젝트 설정 SO, endpoint 선택, 시작/포그라운드 gate, 게임 입력 제한, 일일 이벤트 catch-up 및 DevTool offset은 consuming project가 소유합니다.
+engine-neutral `com.actionfit.time.server` 어셈블리는 서버 UTC 확보와 세션 시계만 소유합니다. Unity 의존 `com.actionfit.time.server.Unity` 어셈블리는 설정 SO와 게임 시간 정책 선택을 소유합니다. endpoint 선택, 시작/포그라운드 gate, 게임 입력 제한, 일일 이벤트 catch-up 및 DevTool offset은 consuming project가 소유합니다.
 
 현재 패키지와 의존 패키지는 Public 배포 대상입니다. 게시, 원격 저장소 생성, tag 및 catalog 등록은 Custom Package Manager의 수동 게시 흐름에서 별도로 수행합니다.
 
 ## 설치
 
-현재 Cat Merge Cafe에서는 embedded package로 사용합니다. Custom Package Manager를 통해 Public 저장소와 `1.0.2` tag를 수동 게시한 뒤 다른 인증된 프로젝트에서는 다음 Git UPM 주소를 사용할 수 있습니다.
+현재 Cat Merge Cafe에서는 embedded package로 사용합니다. `1.0.5` release candidate를 Custom Package Manager로 수동 게시한 뒤 다른 프로젝트에서는 다음 Git UPM 주소를 사용할 수 있습니다.
 
 ```json
 {
   "dependencies": {
-    "com.actionfit.time.server": "https://github.com/ActionFit-Editor/Time_Server.git#1.0.4"
+    "com.actionfit.time.server": "https://github.com/ActionFit-Editor/Time_Server.git#1.0.5"
   }
 }
 ```
@@ -59,8 +74,9 @@ ServerTimeSynchronizationResult result = await synchronizer.SynchronizeAsync(
 ## Unity 메뉴
 
 - Package root: `Tools > Package > ActionFit Time Server`
+- Setting SO: `Tools > Package > ActionFit Time Server > Setting SO`
 - README: `Tools > Package > ActionFit Time Server > README`
 
 ## 테스트
 
-Unity Test Framework의 EditMode에서 `com.actionfit.time.server.Editor.Tests`를 실행해 Unix milliseconds 계산, half-RTT, pause freeze, fresh/stale 관측값과 fail-closed 상태를 검증할 수 있습니다.
+Unity Test Framework의 EditMode에서 `com.actionfit.time.server.Editor.Tests`를 실행해 Unix milliseconds 계산, half-RTT, pause freeze, fresh/stale 관측값, fail-closed 상태, device/server 정책, signed 경계, 직렬화 호환 및 settings lifecycle을 검증할 수 있습니다.

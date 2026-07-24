@@ -1,0 +1,17 @@
+{
+  "name": "com.actionfit.time.server.Unity",
+  "rootNamespace": "ActionFit.Time.Server",
+  "references": [
+    "com.actionfit.time",
+    "com.actionfit.sosingleton"
+  ],
+  "includePlatforms": [],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": true,
+  "defineConstraints": [],
+  "versionDefines": [],
+  "noEngineReferences": false
+}
